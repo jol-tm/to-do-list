@@ -73,11 +73,11 @@ function editTask() {
 }
 
 function removeTask() {
-    let desc = $(this).parent().parent();
-    desc.css('scale', 0);
+    let taskItem = $(this).parent().parent();
+    taskItem.css({'scale': .75, 'opacity': 0});
 
     setTimeout(() => {
-        desc.remove();
+        taskItem.remove();
         tasks = $('#tasks').html();
         localStorage.setItem('tasks', tasks);
     }, 500);
