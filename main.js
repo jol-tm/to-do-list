@@ -80,7 +80,7 @@ function removeTask() {
         taskItem.remove();
         tasks = $('#tasks').html();
         localStorage.setItem('tasks', tasks);
-    }, 500);
+    }, 300);
 }
 
 function handleCheck() {
