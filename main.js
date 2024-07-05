@@ -54,14 +54,19 @@ function editTask() {
         desc.removeAttr('readonly');
         desc.css('color', 'lightseagreen');
         desc.focus();
-        editBtn.text('✓');
+        editBtn.html('<img src="icons/editOff.svg" alt="Parar edição">');
     } else {
         newDesc = desc.val();
-        desc.attr('value', newDesc);
-        desc.attr('readonly', '');
-        desc.css('color', 'black');
-        desc.blur();
-        editBtn.html('<img src="icons/pencil.svg" alt="Editar">');
+        if (newDesc == '') {
+            desc.val('Insira algo');
+            desc.css('color', 'tomato');
+        } else {
+            desc.attr('value', newDesc);
+            desc.attr('readonly', '');
+            desc.css('color', 'black');
+            desc.blur();
+            editBtn.html('<img src="icons/pencil.svg" alt="Editar">');
+        }
     }
     tasks = $('#tasks').html();
     localStorage.setItem('tasks', tasks);
