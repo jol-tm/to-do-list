@@ -96,8 +96,6 @@ button:active {
     border: var(--border);
     border-radius: var(--bdrRadius);
     transition: .3s;
-}
-.taskItemAnim {
     animation: showUp .3s;
 }
 
@@ -113,12 +111,15 @@ button:active {
     text-overflow: ellipsis;
     transition: .3s;
 }
+.taskDesc::placeholder {
+    color: tomato;
+}
 .crossOut {
     position: absolute;
     top: 1.6rem;
     left: 2.7rem;
     width: 0;
-    border: 0;
+    border: 0px solid black;
     transition: .3s;
 }
 .taskCheck {

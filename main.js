@@ -12,10 +12,10 @@ let tasks = localStorage.getItem('tasks') || '';
 function addTask() {
     let taskInput = $('#taskInput');
     let taskItem = (
-        `<div class="taskItem taskItemAnim">
+        `<div class="taskItem">
             <div class="boxTask">
                 <input class="taskCheck" type="checkbox">
-                <input class="taskDesc" type="text" value="${taskInput.val()}" maxlength="50" readonly>
+                <input class="taskDesc" type="text" value="${taskInput.val()}" maxlength="50" placeholder="Insira algo" readonly>
                 <hr class="crossOut">
             </div>
             <div class="boxBtns">
@@ -27,27 +27,27 @@ function addTask() {
 
     if (taskInput.val() == '') {
         taskInput.css('border', '2px solid tomato');
-        taskInput.attr('placeholder', 'Insira algo');
     } else {
         taskInput.css('border', 'var(--border)');
-        taskInput.attr('placeholder', 'Insira uma tarefa para adicioná-la');
-        $('.taskItem').removeClass('taskItemAnim');
+        $('#tasks').prepend(taskItem);
         tasks = $('#tasks').html();
-        tasks = taskItem + tasks;
         localStorage.setItem('tasks', tasks);
-        $('#tasks').html(tasks);
+        taskInput.val(''); 
+        // removes all the old event handlers before adding new ones to prevent having more than one
+        $('.editBtn').off(); 
+        $('.editBtn').on('click', editTask);
+        $('.removeBtn').off();
+        $('.removeBtn').on('click', removeTask);
+        $('.taskCheck').off();
+        $('.taskCheck').on('click', handleCheck);
     }
-    taskInput.val('');
-    $('.editBtn').on('click', editTask);
-    $('.removeBtn').on('click', removeTask);
-    $('.taskCheck').on('click', handleCheck);
 }
 
 function editTask() {
     let desc = $(this).parent().prev().children('.taskDesc');
     let editBtn = $(this);
     let newDesc = desc.val();
-    desc.val('');
+    desc.val(''); // clears the input and refill it to put the cursor in the end
     desc.val(newDesc);
     
     if (desc.attr('readonly')) {
@@ -55,21 +55,15 @@ function editTask() {
         desc.css('color', 'lightseagreen');
         desc.focus();
         editBtn.html('<img src="icons/editOff.svg" alt="Parar edição">');
-    } else {
-        newDesc = desc.val();
-        if (newDesc == '') {
-            desc.val('Insira algo');
-            desc.css('color', 'tomato');
-        } else {
-            desc.attr('value', newDesc);
-            desc.attr('readonly', '');
-            desc.css('color', 'black');
-            desc.blur();
-            editBtn.html('<img src="icons/pencil.svg" alt="Editar">');
-        }
+    } else if (newDesc != '') {
+        desc.attr('value', newDesc);
+        desc.attr('readonly', '');
+        desc.css('color', 'black');
+        desc.blur();
+        editBtn.html('<img src="icons/pencil.svg" alt="Editar">');
+        tasks = $('#tasks').html();
+        localStorage.setItem('tasks', tasks);
     }
-    tasks = $('#tasks').html();
-    localStorage.setItem('tasks', tasks);
 }
 
 function removeTask() {
@@ -89,10 +83,10 @@ function handleCheck() {
 
     if (taskCheck.attr('checked')) {
         taskCheck.removeAttr('checked');
-        crossOut.css({'width': '0%', 'border':  '0px solid black'});
+        crossOut.css({'width': '0%', 'border': '0px solid black'});
     } else {
         taskCheck.attr('checked', '');
-        crossOut.css({'width': '90%', 'border': '1px solid black'});
+        crossOut.css({'width': '90%', 'border': '.5px solid black'});
     }
     tasks = $('#tasks').html();
     localStorage.setItem('tasks', tasks);
