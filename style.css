@@ -116,14 +116,7 @@ button:active {
 .taskDesc::placeholder {
     color: tomato;
 }
-.crossOut {
-    position: absolute;
-    top: 1.6rem;
-    left: 2.7rem;
-    width: 0;
-    border: 0px solid black;
-    transition: .3s;
-}
+
 .taskCheck {
     width: 2rem;
     height: 2rem;

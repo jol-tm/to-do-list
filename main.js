@@ -16,7 +16,6 @@ function addTask() {
             <div class="boxTask">
                 <input class="taskCheck" type="checkbox">
                 <textarea class="taskDesc" maxlength="300" placeholder="Insira algo" readonly>${taskInput.val()}</textarea>
-                <hr class="crossOut">
             </div>
             <div class="boxBtns">
                 <button class="editBtn"><img src="icons/pencil.svg" alt="Editar"></button>
@@ -56,12 +55,13 @@ function editTask() {
         desc.focus();
         editBtn.html('<img src="icons/editOff.svg" alt="Parar edição">');
     } else if (newDesc != '') {
-        desc.attr('value', newDesc);
+        desc.text(newDesc);
         desc.attr('readonly', '');
         desc.css('color', 'black');
         desc.blur();
         editBtn.html('<img src="icons/pencil.svg" alt="Editar">');
         tasks = $('#tasks').html();
+        console.log(tasks)
         localStorage.setItem('tasks', tasks);
     }
 }
@@ -79,14 +79,14 @@ function removeTask() {
 
 function handleCheck() {
     let taskCheck = $(this);
-    let crossOut = $(this).siblings('.crossOut');
+    let desc = $(this).siblings('.taskDesc');
 
     if (taskCheck.attr('checked')) {
         taskCheck.removeAttr('checked');
-        crossOut.css({'width': '0%', 'border': '0px solid black'});
+        desc.css('textDecoration', 'none');
     } else {
         taskCheck.attr('checked', '');
-        crossOut.css({'width': '90%', 'border': '.5px solid black'});
+        desc.css('textDecoration', 'line-through');
     }
     tasks = $('#tasks').html();
     localStorage.setItem('tasks', tasks);
