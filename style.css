@@ -102,13 +102,15 @@ button:active {
 .taskDesc {
     font-family: inherit;
     font-size: inherit;
+    align-content: center;
     outline: none;
     padding: 0 .5rem;
     border: none;
-    width: 45vw;
+    width: 48vw;
     max-width: 28rem;
     min-height: 3rem;
-    text-overflow: ellipsis;
+    field-sizing: content;
+    resize: none;
     transition: .3s;
 }
 .taskDesc::placeholder {

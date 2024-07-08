@@ -15,7 +15,7 @@ function addTask() {
         `<div class="taskItem">
             <div class="boxTask">
                 <input class="taskCheck" type="checkbox">
-                <input class="taskDesc" type="text" value="${taskInput.val()}" maxlength="50" placeholder="Insira algo" readonly>
+                <textarea class="taskDesc" maxlength="300" placeholder="Insira algo" readonly>${taskInput.val()}</textarea>
                 <hr class="crossOut">
             </div>
             <div class="boxBtns">
