@@ -107,7 +107,7 @@ button:active {
     padding: 0 .5rem;
     border: none;
     width: 48vw;
-    max-width: 28rem;
+    max-width: 27rem;
     min-height: 3rem;
     field-sizing: content;
     resize: none;
