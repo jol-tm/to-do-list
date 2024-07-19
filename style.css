@@ -88,6 +88,7 @@ button:active {
     align-items: center;
     gap: var(--gap);
     flex-wrap: wrap;
+    background-color: white;
     width: 95vw;
     max-width: 40rem;
     min-width: 20rem;

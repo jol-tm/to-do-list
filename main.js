@@ -5,6 +5,7 @@ $(document).ready(function(){
     $('.editBtn').on('click', editTask);
     $('.removeBtn').on('click', removeTask);
     $('.taskCheck').on('click', handleCheck);
+    $('#tasks').sortable({ stop: saveTasks });
 })
 
 let tasks = localStorage.getItem('tasks') || '';
@@ -29,8 +30,7 @@ function addTask() {
     } else {
         taskInput.css('border', 'var(--border)');
         $('#tasks').prepend(taskItem);
-        tasks = $('#tasks').html();
-        localStorage.setItem('tasks', tasks);
+        saveTasks();
         taskInput.val(''); 
         // removes all the old event handlers before adding new ones to prevent having more than one
         $('.editBtn').off(); 
@@ -60,9 +60,7 @@ function editTask() {
         desc.css('color', 'black');
         desc.blur();
         editBtn.html('<img src="icons/pencil.svg" alt="Editar">');
-        tasks = $('#tasks').html();
-        console.log(tasks)
-        localStorage.setItem('tasks', tasks);
+        saveTasks();
     }
 }
 
@@ -72,8 +70,7 @@ function removeTask() {
 
     setTimeout(() => {
         taskItem.remove();
-        tasks = $('#tasks').html();
-        localStorage.setItem('tasks', tasks);
+        saveTasks();
     }, 300);
 }
 
@@ -88,6 +85,10 @@ function handleCheck() {
         taskCheck.attr('checked', '');
         desc.css('textDecoration', 'line-through');
     }
+    saveTasks();
+}
+
+function saveTasks() {
     tasks = $('#tasks').html();
     localStorage.setItem('tasks', tasks);
 }
